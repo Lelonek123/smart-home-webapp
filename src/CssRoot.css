@@ -1,0 +1,7 @@
+:root {
+    --menu-size: 50px;
+}
+
+* {
+    box-sizing: border-box;
+}

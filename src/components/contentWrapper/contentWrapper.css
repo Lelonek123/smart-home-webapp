@@ -1,0 +1,14 @@
+:root {
+    --main-wrapper-top-margin-offset: 60px;
+}
+
+.main-wrapper {
+    margin-top: calc(var(--menu-size) + var(--main-wrapper-top-margin-offset));
+    min-height: 200px;
+    height: fit-content;
+    min-width: 400px;
+    width: 50vw;
+    background-color: cyan;
+    margin-left: 50vw;
+    transform: translateX(-50%);
+}

@@ -1,0 +1,74 @@
+.formWrapper {
+    max-width: 400px;
+    width: calc(100vw - 20px);
+    padding: 0;
+}
+
+.form {
+    padding: 40px 20px 20px 20px;
+    background-color: hsl(0, 0%, 92%);
+}
+
+.formRow > label {
+    color: hsl(0, 0%, 15%);
+    font-size: 16px;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.formRow > input {
+    margin: 0;
+    width: 100%;
+    height: 35px;
+    padding-left: 10px;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.formRow {
+    margin-bottom: 10px;
+}
+
+.formRow:last-child {
+    margin-bottom: 0;
+}
+
+.formRow .checkbox {
+    aspect-ratio: 1 / 1;
+    height: 20px;
+}
+
+.formHeader {
+    height: 60px;
+    background-color: hsl(223, 65%, 42%);
+    font-size: 26px;
+    color: white;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rememberMeWrapper {
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.formRow button {
+    margin-top: 17px;
+    width: 100%;
+    height: 40px;
+}
+
+.registerPrompt {
+    font-size: 14px;
+}

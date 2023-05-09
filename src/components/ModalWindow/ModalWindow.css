@@ -1,0 +1,20 @@
+.ModalWindow {
+    max-height: 100vh;
+    max-width: 100vw;
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    margin-left: 50vw;
+    margin-top: 50vh;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.ModalBackground {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    background-color: hsla(0, 0%, 0%, 40%);
+}
