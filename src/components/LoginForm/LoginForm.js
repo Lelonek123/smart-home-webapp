@@ -1,7 +1,10 @@
 import React from "react";
 import "./LoginRegister.css";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm(props) {
+    const navigate = useNavigate();
+
     return (
         <div className="loginForm formWrapper">
             <div className="formHeader">
@@ -34,17 +37,26 @@ function LoginForm(props) {
                                 type="checkbox"
                                 name="rememberMe"
                                 className="checkbox"
+                                id="rememberMe"
                             ></input>
                         </div>
                         <div className="forgotPassword">
-                            <a href="/">Forgot your password?</a>
+                            <a>Forgot your password?</a>
                         </div>
                     </div>
                 </div>
                 <div className="formRow">
                     <button>Log in</button>
                 </div>
-                <a className="registerPrompt">Don't have and account yet?</a>
+                <div className="registerPrompt">
+                    <a
+                        onClick={() => {
+                            navigate("/register");
+                        }}
+                    >
+                        Don't have and account yet?
+                    </a>
+                </div>
             </form>
         </div>
     );

@@ -1,7 +1,10 @@
 import React from "react";
 import "./LoginRegister.css";
+import { useNavigate } from "react-router-dom";
 
 function Register(props) {
+    const navigate = useNavigate();
+
     return (
         <div className="registerForm formWrapper">
             <div className="formHeader">
@@ -12,7 +15,7 @@ function Register(props) {
                     <label htmlFor="email">Email</label>
                     <input
                         type="text"
-                        placeholder="Enter your email"
+                        placeholder="Email"
                         name="email"
                         id="email"
                     ></input>
@@ -21,16 +24,16 @@ function Register(props) {
                     <label htmlFor="password">Password</label>
                     <input
                         type="password"
-                        placeholder="Enter your password"
+                        placeholder="Password"
                         name="password"
                         id="password"
                     ></input>
                 </div>
                 <div className="formRow">
-                    <label htmlFor="confirmPassword">Password</label>
+                    <label htmlFor="confirmPassword">Confirm Password</label>
                     <input
                         type="password"
-                        placeholder="Enter your password"
+                        placeholder="Confirm password"
                         name="confirmPassword"
                         id="confirmPassword"
                     ></input>
@@ -38,6 +41,15 @@ function Register(props) {
 
                 <div className="formRow">
                     <button>Register</button>
+                </div>
+                <div className="registerPrompt">
+                    <a
+                        onClick={() => {
+                            navigate("/login");
+                        }}
+                    >
+                        Already have and account?
+                    </a>
                 </div>
             </form>
         </div>

@@ -33,13 +33,6 @@ function App() {
     return (
         <div className="App">
             <RouterProvider router={router} />
-            <button
-                onClick={() => {
-                    setIsAuth(!isAuth);
-                }}
-            >
-                login
-            </button>
         </div>
     );
 }
