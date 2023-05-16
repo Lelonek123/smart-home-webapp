@@ -1,9 +1,43 @@
 import React from "react";
 import "./LoginRegister.css";
 import { useNavigate } from "react-router-dom";
+import { auth, logInWithEmailAndPassword } from "../../firebase.js";
+import { useAuthState } from "react-firebase-hooks/auth";
+import {
+    setPersistence,
+    browserSessionPersistence,
+    browserLocalPersistence,
+} from "firebase/auth";
 
 function LoginForm(props) {
     const navigate = useNavigate();
+    const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("");
+    const [rememberMe, setRememberMe] = React.useState(false);
+    const [user, loading, error] = useAuthState(auth);
+
+    React.useEffect(() => {
+        if (loading) {
+            return;
+        }
+        if (user) {
+            navigate("/app");
+        }
+    }, [user, loading]);
+
+    const loginHandler = () => {
+        setPersistence(
+            auth,
+            rememberMe ? browserLocalPersistence : browserSessionPersistence
+        )
+            .then(() => {
+                logInWithEmailAndPassword(email, password);
+            })
+            .catch((err) => {
+                console.error(err);
+                alert(err.message);
+            });
+    };
 
     return (
         <div className="loginForm formWrapper">
@@ -18,6 +52,8 @@ function LoginForm(props) {
                         placeholder="Enter your email"
                         name="email"
                         id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     ></input>
                 </div>
                 <div className="formRow">
@@ -27,6 +63,8 @@ function LoginForm(props) {
                         placeholder="Enter your password"
                         name="password"
                         id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     ></input>
                 </div>
                 <div className="formRow">
@@ -38,6 +76,9 @@ function LoginForm(props) {
                                 name="rememberMe"
                                 className="checkbox"
                                 id="rememberMe"
+                                onChange={(e) =>
+                                    setRememberMe(e.target.checked)
+                                }
                             ></input>
                         </div>
                         <div className="forgotPassword">
@@ -46,7 +87,14 @@ function LoginForm(props) {
                     </div>
                 </div>
                 <div className="formRow">
-                    <button>Log in</button>
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            loginHandler();
+                        }}
+                    >
+                        Log in
+                    </button>
                 </div>
                 <div className="registerPrompt">
                     <a
