@@ -7,6 +7,7 @@ import {
     sendPasswordResetEmail,
     signOut,
     updateProfile,
+    sendEmailVerification,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -30,10 +31,20 @@ const logInWithEmailAndPassword = async (email, password) => {
     }
 };
 
-const registerWithEmailAndPassword = async (username, email, password) => {
+const registerWithEmailAndPassword = async (email, password) => {
     try {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         const user = res.user;
+        await updateProfile(user, { displayName: email })
+            .then()
+            .catch((err) => {
+                alert(`Failed to update displaynema (Error ${err})`);
+            });
+        sendEmailVerification(user)
+            .then()
+            .catch(() => {
+                alert("Failed to send verification email");
+            });
     } catch (err) {
         console.error(err);
         alert(err.message);

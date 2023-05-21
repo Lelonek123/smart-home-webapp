@@ -1,9 +1,32 @@
 import React from "react";
 import "./LoginRegister.css";
 import { useNavigate } from "react-router-dom";
+import { auth, registerWithEmailAndPassword } from "../../firebase.js";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function Register(props) {
     const navigate = useNavigate();
+    const [user, loading, error] = useAuthState(auth);
+    const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("");
+    const [confirmPassword, setConfirmPassword] = React.useState("");
+
+    React.useEffect(() => {
+        if (loading) {
+            return;
+        }
+        if (user) {
+            navigate("/app");
+        }
+    }, [user, loading]);
+
+    const registerHandler = () => {
+        if (password == confirmPassword) {
+            registerWithEmailAndPassword(email, password);
+        } else {
+            alert("Passwords must be the same");
+        }
+    };
 
     return (
         <div className="registerForm formWrapper">
@@ -18,6 +41,8 @@ function Register(props) {
                         placeholder="Email"
                         name="email"
                         id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     ></input>
                 </div>
                 <div className="formRow">
@@ -27,6 +52,8 @@ function Register(props) {
                         placeholder="Password"
                         name="password"
                         id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     ></input>
                 </div>
                 <div className="formRow">
@@ -36,11 +63,20 @@ function Register(props) {
                         placeholder="Confirm password"
                         name="confirmPassword"
                         id="confirmPassword"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                     ></input>
                 </div>
 
                 <div className="formRow">
-                    <button>Register</button>
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            registerHandler();
+                        }}
+                    >
+                        Register
+                    </button>
                 </div>
                 <div className="registerPrompt">
                     <a
