@@ -1,0 +1,107 @@
+.sideMenu {
+    padding-top: 7px;
+    width: 70px;
+    background-color: var(--main-background-color);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition-duration: 200ms;
+}
+
+.sideMenu.active {
+    width: 200px;
+}
+
+.sideMenu .sideMenuHeader {
+    padding: 0 7px;
+    width: 100%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    font-size: 22px;
+    color: white;
+    align-items: center;
+    padding-bottom: 7px;
+    border-bottom: 1px solid hsl(223, 56%, 60%);
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+.sideMenuHeader p {
+    margin: 0 0 0 15px;
+    padding: 0;
+    line-height: 1;
+}
+
+.sideMenuHeader > div {
+    opacity: 1;
+    min-width: 100px;
+    max-height: 50px;
+    visibility: hidden;
+
+    transition-property: opacity;
+    transition-duration: 50ms;
+    transition-delay: 150ms;
+    transition-property: visibility;
+    transition-duration: 1ms;
+    transition-delay: 199ms;
+}
+
+.sideMenuHeader.active > div {
+    flex-shrink: 0;
+    opacity: 1;
+    visibility: visible;
+    transition-duration: 0s;
+    transition-delay: 0s;
+}
+
+.sideMenuHeader > div > p:last-child {
+    margin-left: 35px;
+}
+
+.sideMenuHeader button {
+    flex-shrink: 0;
+}
+
+.sideMenu .sideMenuHeader .svg svg {
+    transform-origin: center;
+    transition-duration: 200ms;
+}
+
+.sideMenu.active .sideMenuHeader .svg svg {
+    transform: rotate(0.5turn);
+}
+
+.sideMenu button {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    border: 2px solid white;
+    border-radius: 8px;
+    background-color: hsl(223, 56%, 45%);
+    overflow: hidden;
+}
+
+.sideMenu button:not(.headerButton) {
+    width: calc(100% - 10px);
+}
+
+.sideMenu button:hover {
+    background-color: hsl(223, 56%, 50%);
+    cursor: pointer;
+}
+
+.sideMenu button .svg {
+    height: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+@media screen and (max-width: 480px) {
+    .sideMenu {
+        height: 50px;
+        width: 100%;
+    }
+}

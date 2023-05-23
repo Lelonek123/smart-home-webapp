@@ -3,7 +3,7 @@
     min-height: 100vh;
     height: fit-content;
     width: fit-content;
-    background-color: hsl(223, 56%, 40%);
+    background-color: var(--main-background-color);
 }
 
 .logRegButtonWrapper {

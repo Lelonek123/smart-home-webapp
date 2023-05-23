@@ -1,5 +1,4 @@
 import React from "react";
-import ModalWindow from "../../components/ModalWindow/ModalWindow.js";
 import "./LandingPage.css";
 import LoginForm from "../../components/LoginForm/LoginForm.js";
 import RegisterForm from "../../components/LoginForm/RegisterForm.js";

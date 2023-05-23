@@ -3,12 +3,13 @@
 }
 
 .main-wrapper {
-    margin-top: calc(var(--menu-size) + var(--main-wrapper-top-margin-offset));
+    margin-top: var(--main-wrapper-top-margin-offset);
     min-height: 200px;
     height: fit-content;
-    min-width: 400px;
-    width: 50vw;
+    min-width: 300px;
+    width: 100%;
+    max-width: 800px;
     background-color: cyan;
-    margin-left: 50vw;
+    margin-left: calc(50%);
     transform: translateX(-50%);
 }

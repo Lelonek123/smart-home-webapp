@@ -1,10 +1,12 @@
 import React from "react";
 import ContentWrapper from "../../components/contentWrapper/contentWrapper.js";
-import ModalWindow from "../../components/ModalWindow/ModalWindow.js";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, logout } from "../../firebase.js";
-//main app page component
+import UserView from "./views/User/UserView";
+import Dashboard from "./views/Dashboard/Dashboard";
+import "./AppPage.css";
+import SideMenu from "components/SideMenu/SideMenu.js";
 
 function AppPage(props) {
     let navigate = useNavigate();
@@ -20,8 +22,11 @@ function AppPage(props) {
     }, [user, loading]);
 
     return (
-        <div>
-            <ContentWrapper>Content</ContentWrapper>
+        <div className="appFlexContainer">
+            <SideMenu></SideMenu>
+            <div className="mainContent">
+                <Dashboard></Dashboard>
+            </div>
             <button
                 onClick={() => {
                     logout();
