@@ -7,9 +7,12 @@ import UserView from "./views/User/UserView";
 import Dashboard from "./views/Dashboard/Dashboard";
 import "./AppPage.css";
 import SideMenu from "components/SideMenu/SideMenu.js";
+import UserIcon from "components/SvgIcons/UserIcon.js";
+import HomeIcon from "components/SvgIcons/HomeIcon.js";
 
 function AppPage(props) {
     let navigate = useNavigate();
+    const [view, setView] = React.useState("dashboard");
     const [user, loading, error] = useAuthState(auth);
 
     React.useEffect(() => {
@@ -23,9 +26,36 @@ function AppPage(props) {
 
     return (
         <div className="appFlexContainer">
-            <SideMenu></SideMenu>
+            <SideMenu>
+                <button
+                    activeText="Your account"
+                    key="userButton"
+                    onClick={() => {
+                        setView("user");
+                    }}
+                >
+                    <div className="svg">
+                        <UserIcon></UserIcon>
+                    </div>
+                </button>
+                <button
+                    key="dashboardButton"
+                    activeText="Dashboard"
+                    onClick={() => {
+                        setView("dashboard");
+                    }}
+                >
+                    <div className="svg">
+                        <HomeIcon></HomeIcon>
+                    </div>
+                </button>
+            </SideMenu>
             <div className="mainContent">
-                <Dashboard></Dashboard>
+                {view == "dashboard" ? (
+                    <Dashboard></Dashboard>
+                ) : (
+                    <UserView></UserView>
+                )}
             </div>
             <button
                 onClick={() => {

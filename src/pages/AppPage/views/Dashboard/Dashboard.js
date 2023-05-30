@@ -4,7 +4,7 @@ import ContentWrapper from "components/contentWrapper/contentWrapper.js";
 function Dashboard(props) {
     return (
         <div>
-            <ContentWrapper>Content</ContentWrapper>
+            <ContentWrapper>Dashboard</ContentWrapper>
         </div>
     );
 }

@@ -5,6 +5,7 @@
     width: 100vw;
     height: 100vh;
     min-width: fit-content;
+    overflow: auto;
 }
 
 .mainContent {
@@ -12,13 +13,4 @@
     flex-shrink: 1;
     margin: 20px;
     min-width: 250px;
-}
-
-@media screen and (max-width: 480px) {
-    .appFlexContainer {
-        flex-direction: column;
-    }
-    .mainContent {
-        margin: 20px 0;
-    }
 }
