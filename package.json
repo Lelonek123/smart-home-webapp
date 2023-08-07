@@ -2,6 +2,7 @@
   "name": "smart-home-web",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://95.48.106.222:1337/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -15,6 +16,7 @@
     "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",
     "serve": "^14.2.0",
+    "socket.io-client": "^4.6.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -3,6 +3,7 @@ import "./SideMenu.css";
 import ArrowIcon from "./ArrowIcon.js";
 import { default as PadlockIcon } from "components/SvgIcons/Padlock.js";
 import { logout } from "firebase.js";
+import { socket } from "socketIo.js";
 
 function SideMenu(props) {
     const [active, setActive] = React.useState(false);
@@ -39,6 +40,7 @@ function SideMenu(props) {
                 <button
                     className="footerButton"
                     onClick={() => {
+                        socket.disconnect();
                         logout();
                     }}
                 >

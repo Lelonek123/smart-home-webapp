@@ -9,11 +9,13 @@ import "./AppPage.css";
 import SideMenu from "components/SideMenu/SideMenu.js";
 import UserIcon from "components/SvgIcons/UserIcon.js";
 import HomeIcon from "components/SvgIcons/HomeIcon.js";
+import { socket } from "socketIo.js";
 
 function AppPage(props) {
     let navigate = useNavigate();
     const [view, setView] = React.useState("dashboard");
     const [user, loading, error] = useAuthState(auth);
+    const [drivers, setDrivers] = React.useState([]);
 
     React.useEffect(() => {
         if (loading) {
@@ -21,6 +23,15 @@ function AppPage(props) {
         }
         if (!user) {
             navigate("/login");
+        } else {
+            socket.on("connect", () => {
+                socket.emit("get-drivers", user.uid, (response) => {
+                    if (response.status == "OK") {
+                        setDrivers(response.drivers);
+                    }
+                });
+            });
+            socket.connect();
         }
     }, [user, loading]);
 
@@ -29,7 +40,6 @@ function AppPage(props) {
             <SideMenu>
                 <button
                     activeText="Your account"
-                    key="userButton"
                     onClick={() => {
                         setView("user");
                     }}
@@ -39,7 +49,6 @@ function AppPage(props) {
                     </div>
                 </button>
                 <button
-                    key="dashboardButton"
                     activeText="Dashboard"
                     onClick={() => {
                         setView("dashboard");
@@ -57,13 +66,6 @@ function AppPage(props) {
                     <UserView></UserView>
                 )}
             </div>
-            <button
-                onClick={() => {
-                    logout();
-                }}
-            >
-                Log out
-            </button>
         </div>
     );
 }

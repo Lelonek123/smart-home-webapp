@@ -8,6 +8,10 @@ import {
     signOut,
     updateProfile,
     sendEmailVerification,
+    reauthenticateWithCredential,
+    EmailAuthProvider,
+    updatePassword,
+    updateEmail,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -21,6 +25,36 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+
+const updateUserEmail = async (email, password, newEmail) => {
+    try {
+        const credential = EmailAuthProvider.credential(email, password);
+        await reauthenticateWithCredential(auth.currentUser, credential).then(
+            () => {
+                updateEmail(auth.currentUser, newEmail);
+                alert("Email updated succesfully!");
+            }
+        );
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
+};
+
+const updateUserPassword = async (email, password, newPassword) => {
+    try {
+        const credential = EmailAuthProvider.credential(email, password);
+        await reauthenticateWithCredential(auth.currentUser, credential).then(
+            () => {
+                updatePassword(auth.currentUser, newPassword);
+                alert("Password updated succesfully!");
+            }
+        );
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
+};
 
 const logInWithEmailAndPassword = async (email, password) => {
     try {
@@ -71,4 +105,6 @@ export {
     registerWithEmailAndPassword,
     sendPasswordReset,
     logout,
+    updateUserPassword,
+    updateUserEmail,
 };
