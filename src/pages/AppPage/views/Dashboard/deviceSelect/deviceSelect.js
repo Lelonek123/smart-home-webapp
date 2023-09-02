@@ -134,7 +134,6 @@ function DeviceSelect(props) {
                                     uid: user.uid,
                                 },
                                 (response) => {
-                                    console.log(response);
                                     if (response.status == "OK") {
                                         props.updateDevices(
                                             props.devices.push({

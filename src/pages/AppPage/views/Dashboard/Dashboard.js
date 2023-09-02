@@ -32,6 +32,7 @@ function Dashboard(props) {
                         console.log(id);
                     }}
                     isLoading={props.isLoading}
+                    updateDevices={props.updateDevices}
                 ></DeviceSelect>
                 <DeviceStatus></DeviceStatus>
             </DeviceStatusWrapper>

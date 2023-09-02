@@ -75,6 +75,7 @@ function AppPage(props) {
                     <Dashboard
                         devices={devices}
                         isLoading={devicesLoading}
+                        updateDevices={(devices) => setDevices(devices)}
                     ></Dashboard>
                 ) : (
                     <UserView></UserView>
