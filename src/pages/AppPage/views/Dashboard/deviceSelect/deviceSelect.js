@@ -182,6 +182,85 @@ function DeviceSelect(props) {
         );
     };
 
+    const renderRemoveDevice = () => {
+        return (
+            <div
+                style={{
+                    maxWidth: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    // borderTop: "1px solid hsl(0, 0%, 94%)",
+                    paddingTop: "10px",
+                }}
+            >
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        flexDirection: "row",
+                        flexWrap: "wrap",
+                        maxWidth: "100%",
+                        width: "fit-content",
+                        gap: "10px",
+                    }}
+                >
+                    <div className="device-input-wrapper">
+                        <div>{`Are you sure you want to delete device:`}</div>
+                        <div>{`Addres: ${props.selectedDevice}`}</div>
+                        <div>{`Name: ${
+                            props.devices[
+                                props.devices.findIndex((i) => {
+                                    i.mac_addr == props.selectedDevice;
+                                })
+                            ].name
+                        }`}</div>
+                    </div>
+                </div>
+                <div className="device-input-buttons-wrapper">
+                    <button
+                        onClick={() => {
+                            socket.emit(
+                                "update-drivers",
+                                {
+                                    action: "add",
+                                    mac_addr: addId,
+                                    name: addNameValue,
+                                    uid: user.uid,
+                                },
+                                (response) => {
+                                    if (response.status == "OK") {
+                                        const newDevices = props.devices;
+                                        newDevices.push({
+                                            mac_addr: addId,
+                                            name: addNameValue,
+                                        });
+                                        console.log(newDevices);
+                                        props.updateDevices(newDevices);
+                                        setAddNameValue("");
+                                        setAddId("");
+                                        setShowAddDevice(false);
+                                    }
+                                },
+                            );
+                        }}
+                    >
+                        Add
+                    </button>
+                    <button
+                        onClick={() => {
+                            setAddNameValue("");
+                            setAddId("");
+                            setShowAddDevice(false);
+                        }}
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        );
+    };
+
     return (
         <div
             style={{
@@ -236,7 +315,7 @@ function DeviceSelect(props) {
                     )}
                     {!props.isLoading && renderDeviceSelect()}
                     {showAddDevice && renderAddDevice()}
-                    {showRemoveDevice && <div>Remove</div>}
+                    {showRemoveDevice && renedrRemoveDevice()}
                 </div>
             </div>
         </div>
