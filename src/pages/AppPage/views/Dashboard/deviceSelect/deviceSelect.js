@@ -39,9 +39,10 @@ function DeviceSelect(props) {
                         </option>
                         {props.devices?.map((device, i) => {
                             return (
-                                <option value={device.id} key={device.id}>{`${
-                                    device.name || device.id
-                                }`}</option>
+                                <option
+                                    value={device.mac_addr}
+                                    key={device.mac_addr}
+                                >{`${device.name || device.mac_addr}`}</option>
                             );
                         })}
                     </select>
