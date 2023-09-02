@@ -1,0 +1,22 @@
+.device-input-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.device-input-wrapper > label {
+    margin-bottom: 4px;
+}
+
+.device-input-buttons-wrapper {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+}
+
+.device-input-buttons-wrapper button {
+    flex-grow: 1;
+    max-width: 120px;
+}

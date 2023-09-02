@@ -33,7 +33,7 @@ const updateUserEmail = async (email, password, newEmail) => {
             () => {
                 updateEmail(auth.currentUser, newEmail);
                 alert("Email updated succesfully!");
-            }
+            },
         );
     } catch (err) {
         console.error(err);
@@ -48,7 +48,7 @@ const updateUserPassword = async (email, password, newPassword) => {
             () => {
                 updatePassword(auth.currentUser, newPassword);
                 alert("Password updated succesfully!");
-            }
+            },
         );
     } catch (err) {
         console.error(err);

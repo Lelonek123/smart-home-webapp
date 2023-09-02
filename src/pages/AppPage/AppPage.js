@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ContentWrapper from "../../components/contentWrapper/contentWrapper.js";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -15,25 +15,40 @@ function AppPage(props) {
     let navigate = useNavigate();
     const [view, setView] = React.useState("dashboard");
     const [user, loading, error] = useAuthState(auth);
-    const [drivers, setDrivers] = React.useState([]);
+    const [devices, setDevices] = React.useState(null);
+    const [devicesLoading, setDevicesLoading] = React.useState(true);
+    const [selectedDevice, setSelectedDevice] = useState(null);
+    const [deviceState, setDeviceState] = useState(null);
 
     React.useEffect(() => {
-        if (loading) {
-            return;
-        }
-        if (!user) {
-            navigate("/login");
-        } else {
-            socket.on("connect", () => {
-                socket.emit("get-drivers", user.uid, (response) => {
-                    if (response.status == "OK") {
-                        setDrivers(response.drivers);
-                    }
-                });
-            });
-            socket.connect();
-        }
+        // if (loading) {
+        //     return;
+        // }
+        // if (!user) {
+        // navigate("/login");
+        // } else {
+        setTimeout(() => {
+            setDevices([
+                { name: "dom", id: "1234" },
+                { name: "garag", id: "1324" },
+            ]);
+            setDevicesLoading(false);
+        }, 2000);
+
+        // socket.on("connect", () => {
+        //     socket.emit("get-drivers", user.uid, (response) => {
+        //         if (response.status == "OK") {
+        //             setDevices(response.drivers);
+        //         }
+        //     });
+        // });
+        // socket.connect();
+        // }
     }, [user, loading]);
+
+    if (loading) {
+        return <div>Loading</div>;
+    }
 
     return (
         <div className="appFlexContainer">
@@ -43,6 +58,7 @@ function AppPage(props) {
                     onClick={() => {
                         setView("user");
                     }}
+                    key={"user"}
                 >
                     <div className="svg">
                         <UserIcon></UserIcon>
@@ -53,6 +69,7 @@ function AppPage(props) {
                     onClick={() => {
                         setView("dashboard");
                     }}
+                    key={"dashboard"}
                 >
                     <div className="svg">
                         <HomeIcon></HomeIcon>
@@ -61,7 +78,10 @@ function AppPage(props) {
             </SideMenu>
             <div className="mainContent">
                 {view == "dashboard" ? (
-                    <Dashboard></Dashboard>
+                    <Dashboard
+                        devices={devices}
+                        isLoading={devicesLoading}
+                    ></Dashboard>
                 ) : (
                     <UserView></UserView>
                 )}
