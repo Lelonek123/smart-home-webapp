@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import ContentWrapper from "components/contentWrapper/contentWrapper.js";
 import DeviceSelect from "./deviceSelect/deviceSelect";
 import DeviceStatus from "./DeviceStatus/DeviceStatus";
-import { socket } from "socketIo.js";
 
 const DeviceStatusWrapper = (props) => {
     return (

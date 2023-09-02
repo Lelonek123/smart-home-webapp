@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./deviceSelect.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "firebase.js";
+import { socket } from "socketIo.js";
 
 function DeviceSelect(props) {
     const [showAddDevice, setShowAddDevice] = useState(false);
