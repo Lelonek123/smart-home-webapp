@@ -30,6 +30,7 @@ function AppPage(props) {
             socket.on("connect", () => {
                 socket.emit("get-drivers", user.uid, (response) => {
                     if (response.status == "OK") {
+                        console.log(response.drivers);
                         setDevices(response.drivers);
                     }
                 });
