@@ -124,12 +124,30 @@ function DeviceSelect(props) {
                 </div>
                 <div className="device-input-buttons-wrapper">
                     <button
-                        onClick={socket.emit("update-drivers", {
-                            action: "add",
-                            mac_addr: addId,
-                            name: setAddNameValue,
-                            uid: user.uid,
-                        })}
+                        onClick={() => {
+                            socket.emit(
+                                "update-drivers",
+                                {
+                                    action: "add",
+                                    mac_addr: addId,
+                                    name: setAddNameValue,
+                                    uid: user.uid,
+                                },
+                                (response) => {
+                                    if (response.status == "OK") {
+                                        props.updateDevices(
+                                            props.devices.push({
+                                                mac_addr: addId,
+                                                name: "setAddNameValue",
+                                            }),
+                                        );
+                                        setAddNameValue("");
+                                        setAddId("");
+                                        setShowAddDevice(false);
+                                    }
+                                },
+                            );
+                        }}
                     >
                         Add
                     </button>
