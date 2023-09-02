@@ -33,7 +33,12 @@ function Dashboard(props) {
                 <DeviceSelect
                     devices={props.devices}
                     onSelect={(id, name) => {
-                        socket.emit("update-drivers" {action: 'add', mac_addr: id, name: name, uid: user.uid});
+                        socket.emit("update-drivers", {
+                            action: "add",
+                            mac_addr: id,
+                            name: name,
+                            uid: user.uid,
+                        });
                     }}
                     isLoading={props.isLoading}
                 ></DeviceSelect>
