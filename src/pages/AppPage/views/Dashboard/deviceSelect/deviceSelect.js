@@ -6,6 +6,7 @@ import { socket } from "socketIo.js";
 
 function DeviceSelect(props) {
     const [showAddDevice, setShowAddDevice] = useState(false);
+    const [showRemoveDevice, setShowRemoveDevice] = useState(false);
     const [addNameValue, setAddNameValue] = useState("");
     const [addId, setAddId] = useState("");
     const [user, loading, error] = useAuthState(auth);
@@ -75,6 +76,21 @@ function DeviceSelect(props) {
                     }}
                 >
                     <div>+</div>
+                </button>
+                <button
+                    style={{
+                        marginLeft: "20px",
+                        height: "50px",
+                        width: "50px",
+                        flexShrink: "0",
+                        fontSize: "30px",
+                    }}
+                    onClick={() => {
+                        setShowRemoveDevice(true);
+                    }}
+                    disabled={props.selectedDevice ? true : false}
+                >
+                    <div>-</div>
                 </button>
             </div>
         );

@@ -33,6 +33,7 @@ function Dashboard(props) {
                     }}
                     isLoading={props.isLoading}
                     updateDevices={props.updateDevices}
+                    selectedDevice={selectedDevice}
                 ></DeviceSelect>
                 <DeviceStatus></DeviceStatus>
             </DeviceStatusWrapper>
