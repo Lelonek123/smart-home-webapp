@@ -211,7 +211,7 @@ function DeviceSelect(props) {
                         <div>{`Name: ${
                             props.devices[
                                 props.devices.findIndex((i) => {
-                                    i.mac_addr == props.selectedDevice;
+                                    return i.mac_addr == props.selectedDevice;
                                 })
                             ].name
                         }`}</div>
@@ -315,7 +315,7 @@ function DeviceSelect(props) {
                     )}
                     {!props.isLoading && renderDeviceSelect()}
                     {showAddDevice && renderAddDevice()}
-                    {showRemoveDevice && renedrRemoveDevice()}
+                    {showRemoveDevice && renderRemoveDevice()}
                 </div>
             </div>
         </div>
