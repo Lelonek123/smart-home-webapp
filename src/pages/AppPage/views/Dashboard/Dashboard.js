@@ -4,6 +4,7 @@ import DeviceSelect from "./deviceSelect/deviceSelect";
 import DeviceStatus from "./DeviceStatus/DeviceStatus";
 import { socket } from "socketIo.js";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "firebase.js";
 
 const DeviceStatusWrapper = (props) => {
     return (
