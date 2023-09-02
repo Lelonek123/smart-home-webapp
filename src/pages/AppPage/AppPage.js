@@ -21,29 +21,21 @@ function AppPage(props) {
     const [deviceState, setDeviceState] = useState(null);
 
     React.useEffect(() => {
-        // if (loading) {
-        //     return;
-        // }
-        // if (!user) {
-        // navigate("/login");
-        // } else {
-        setTimeout(() => {
-            setDevices([
-                { name: "dom", id: "1234" },
-                { name: "garag", id: "1324" },
-            ]);
-            setDevicesLoading(false);
-        }, 2000);
-
-        // socket.on("connect", () => {
-        //     socket.emit("get-drivers", user.uid, (response) => {
-        //         if (response.status == "OK") {
-        //             setDevices(response.drivers);
-        //         }
-        //     });
-        // });
-        // socket.connect();
-        // }
+        if (loading) {
+            return;
+        }
+        if (!user) {
+            navigate("/login");
+        } else {
+            socket.on("connect", () => {
+                socket.emit("get-drivers", user.uid, (response) => {
+                    if (response.status == "OK") {
+                        setDevices(response.drivers);
+                    }
+                });
+            });
+            socket.connect();
+        }
     }, [user, loading]);
 
     if (loading) {
