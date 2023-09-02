@@ -25,7 +25,7 @@ function DeviceSelect(props) {
                 {props.devices && props.devices.length > 0 ? (
                     <select
                         onChange={(e) => {
-                            props.onSelect(e.target.value);
+                            props.onSelect(e.target.value, e.target.text);
                         }}
                         style={{
                             flexGrow: "1",

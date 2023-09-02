@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import ContentWrapper from "components/contentWrapper/contentWrapper.js";
 import DeviceSelect from "./deviceSelect/deviceSelect";
 import DeviceStatus from "./DeviceStatus/DeviceStatus";
+import { socket } from "socketIo.js";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const DeviceStatusWrapper = (props) => {
     return (
@@ -21,6 +23,8 @@ const DeviceStatusWrapper = (props) => {
 };
 
 function Dashboard(props) {
+    const [user, loading, error] = useAuthState(auth);
+
     const [selectedDevice, setSelectedDevice] = useState(null);
 
     return (
@@ -28,8 +32,8 @@ function Dashboard(props) {
             <DeviceStatusWrapper>
                 <DeviceSelect
                     devices={props.devices}
-                    onSelect={(id) => {
-                        console.log(id);
+                    onSelect={(id, name) => {
+                        socket.emit("update-drivers" {action: 'add', mac_addr: id, name: name, uid: user.uid});
                     }}
                     isLoading={props.isLoading}
                 ></DeviceSelect>
