@@ -135,12 +135,12 @@ function DeviceSelect(props) {
                                 },
                                 (response) => {
                                     if (response.status == "OK") {
-                                        props.updateDevices(
-                                            props.devices.push({
-                                                mac_addr: addId,
-                                                name: "setAddNameValue",
-                                            }),
-                                        );
+                                        const newDevices = props.devices;
+                                        newDevices.push({
+                                            mac_addr: addId,
+                                            name: "setAddNameValue",
+                                        });
+                                        props.updateDevices(newDevices);
                                         setAddNameValue("");
                                         setAddId("");
                                         setShowAddDevice(false);
