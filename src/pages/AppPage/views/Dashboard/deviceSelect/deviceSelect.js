@@ -130,7 +130,7 @@ function DeviceSelect(props) {
                                 {
                                     action: "add",
                                     mac_addr: addId,
-                                    name: setAddNameValue,
+                                    name: addNameValue,
                                     uid: user.uid,
                                 },
                                 (response) => {
