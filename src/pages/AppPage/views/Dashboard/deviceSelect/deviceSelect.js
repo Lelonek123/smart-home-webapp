@@ -236,6 +236,7 @@ function DeviceSelect(props) {
                     )}
                     {!props.isLoading && renderDeviceSelect()}
                     {showAddDevice && renderAddDevice()}
+                    {showRemoveDevice && <div>Remove</div>}
                 </div>
             </div>
         </div>
