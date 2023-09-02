@@ -223,38 +223,33 @@ function DeviceSelect(props) {
                             socket.emit(
                                 "update-drivers",
                                 {
-                                    action: "add",
+                                    action: "remove",
                                     mac_addr: addId,
-                                    name: addNameValue,
                                     uid: user.uid,
                                 },
                                 (response) => {
                                     if (response.status == "OK") {
-                                        const newDevices = props.devices;
-                                        newDevices.push({
-                                            mac_addr: addId,
-                                            name: addNameValue,
-                                        });
-                                        console.log(newDevices);
+                                        const newDevices = props.devices.filter(
+                                            (i) => {
+                                                i.mac_addr !=
+                                                    props.selectedDevice;
+                                            },
+                                        );
                                         props.updateDevices(newDevices);
-                                        setAddNameValue("");
-                                        setAddId("");
-                                        setShowAddDevice(false);
+                                        setShowRemoveDevice(false);
                                     }
                                 },
                             );
                         }}
                     >
-                        Add
+                        Yes
                     </button>
                     <button
                         onClick={() => {
-                            setAddNameValue("");
-                            setAddId("");
-                            setShowAddDevice(false);
+                            setShowRemoveDevice(false);
                         }}
                     >
-                        Cancel
+                        No
                     </button>
                 </div>
             </div>
