@@ -138,8 +138,9 @@ function DeviceSelect(props) {
                                         const newDevices = props.devices;
                                         newDevices.push({
                                             mac_addr: addId,
-                                            name: "setAddNameValue",
+                                            name: addNameValue,
                                         });
+                                        console.log(newDevices);
                                         props.updateDevices(newDevices);
                                         setAddNameValue("");
                                         setAddId("");
