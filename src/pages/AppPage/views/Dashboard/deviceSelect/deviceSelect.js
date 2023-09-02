@@ -88,7 +88,7 @@ function DeviceSelect(props) {
                     onClick={() => {
                         setShowRemoveDevice(true);
                     }}
-                    disabled={props.selectedDevice ? true : false}
+                    disabled={props.selectedDevice ? false : true}
                 >
                     <div>-</div>
                 </button>
