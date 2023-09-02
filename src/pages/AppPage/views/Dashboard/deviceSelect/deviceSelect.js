@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./deviceSelect.css";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "firebase.js";
 
 function DeviceSelect(props) {
     const [showAddDevice, setShowAddDevice] = useState(false);
+    const [addNameValue, setAddNameValue] = useState("");
+    const [addId, setAddId] = useState("");
+    const [user, loading, error] = useAuthState(auth);
 
     useEffect(() => {
         if (props.isLoading) {
@@ -25,7 +30,7 @@ function DeviceSelect(props) {
                 {props.devices && props.devices.length > 0 ? (
                     <select
                         onChange={(e) => {
-                            props.onSelect(e.target.value, e.target.text);
+                            props.onSelect(e.target.value);
                         }}
                         style={{
                             flexGrow: "1",
@@ -103,16 +108,39 @@ function DeviceSelect(props) {
                             type="text"
                             id="deviceId"
                             placeholder="Device ID"
+                            onInput={(e) => setAddId(e.target.value)}
                         />
                     </div>
                     <div className="device-input-wrapper">
                         <label htmlFor="alias">Device alias</label>
-                        <input type="text" id="alias" placeholder="Alias" />
+                        <input
+                            type="text"
+                            id="alias"
+                            placeholder="Alias"
+                            onInput={(e) => setAddNameValue(e.target.value)}
+                        />
                     </div>
                 </div>
                 <div className="device-input-buttons-wrapper">
-                    <button>Add</button>
-                    <button>Cancel</button>
+                    <button
+                        onClick={socket.emit("update-drivers", {
+                            action: "add",
+                            mac_addr: addId,
+                            name: setAddNameValue,
+                            uid: user.uid,
+                        })}
+                    >
+                        Add
+                    </button>
+                    <button
+                        onClick={() => {
+                            setAddNameValue("");
+                            setAddId("");
+                            setShowAddDevice(false);
+                        }}
+                    >
+                        Cancel
+                    </button>
                 </div>
             </div>
         );
