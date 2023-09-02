@@ -28,7 +28,7 @@ function Dashboard(props) {
             <DeviceStatusWrapper>
                 <DeviceSelect
                     devices={props.devices}
-                    onSelect={(id) => selectedDevice(id)}
+                    onSelect={(id) => setSelectedDevice(id)}
                     isLoading={props.isLoading}
                     updateDevices={props.updateDevices}
                     selectedDevice={selectedDevice}
