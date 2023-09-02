@@ -224,7 +224,7 @@ function DeviceSelect(props) {
                                 "update-drivers",
                                 {
                                     action: "remove",
-                                    mac_addr: addId,
+                                    mac_addr: props.selectedDevice,
                                     uid: user.uid,
                                 },
                                 (response) => {
