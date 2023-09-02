@@ -231,8 +231,10 @@ function DeviceSelect(props) {
                                     if (response.status == "OK") {
                                         const newDevices = props.devices.filter(
                                             (i) => {
-                                                i.mac_addr !=
-                                                    props.selectedDevice;
+                                                return (
+                                                    i.mac_addr !=
+                                                    props.selectedDevice
+                                                );
                                             },
                                         );
                                         props.updateDevices(newDevices);
