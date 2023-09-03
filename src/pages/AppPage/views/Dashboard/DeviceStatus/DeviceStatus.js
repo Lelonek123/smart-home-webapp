@@ -1,6 +1,11 @@
 import React from "react";
 
 function DeviceStatus(props) {
+    const renderContent = () => {
+        console.log(props.selectedDeviceData);
+        return <div>{`${props.selectedDeviceData}`}</div>;
+    };
+
     return (
         <div
             style={{
@@ -41,7 +46,9 @@ function DeviceStatus(props) {
                         alignItems: "center",
                     }}
                 >
-                    Content
+                    {props.selectedDevice &&
+                        props.selectedDeviceData &&
+                        renderContent()}
                 </div>
             </div>
         </div>

@@ -183,6 +183,8 @@ function DeviceSelect(props) {
     };
 
     const renderRemoveDevice = () => {
+        console.log(props.devices);
+
         return (
             <div
                 style={{

@@ -11,6 +11,11 @@ import UserIcon from "components/SvgIcons/UserIcon.js";
 import HomeIcon from "components/SvgIcons/HomeIcon.js";
 import { socket } from "socketIo.js";
 
+const drivers = [
+    { mac_addr: "22:22:22:22", name: "home" },
+    { mac_addr: "11:11:11:11", name: "home2" },
+];
+
 function AppPage(props) {
     let navigate = useNavigate();
     const [view, setView] = React.useState("dashboard");
@@ -27,16 +32,19 @@ function AppPage(props) {
         if (!user) {
             navigate("/login");
         } else {
-            socket.on("connect", () => {
-                socket.emit("get-drivers", user.uid, (response) => {
-                    if (response.status == "OK") {
-                        console.log(response.drivers);
-                        setDevices(response.drivers);
-                        setDevicesLoading(false);
-                    }
-                });
-            });
-            socket.connect();
+            // socket.on("connect", () => {
+            //     socket.emit("get-drivers", user.uid, (response) => {
+            //         if (response.status == "OK") {
+            //             console.log(response.drivers);
+            //             setDevices(response.drivers);
+            //             setDevicesLoading(false);
+            //         }
+            //     });
+            // });
+            // socket.connect();
+
+            setDevices(drivers);
+            setDevicesLoading(false);
         }
     }, [user, loading]);
 
