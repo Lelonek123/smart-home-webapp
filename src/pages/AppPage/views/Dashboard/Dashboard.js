@@ -6,6 +6,7 @@ import LightRgbTile from "components/pTiles/lightRgb";
 import LightTile from "components/pTiles/light";
 import GarageGate from "components/pTiles/garageGate";
 import Lock from "components/pTiles/lock";
+import { socket } from "socketIo";
 
 const devicesData = {
     "22:22:22:22": {
@@ -116,14 +117,33 @@ function Dashboard(props) {
         border: "1px solid hsl(0, 0%, 94%)",
     };
 
+    const updateState = (newData, id) => {
+        socket.emit(
+            "update-state",
+            {
+                id: id,
+                newState: newData,
+            },
+            (response) => {
+                if (response.status == "OK") {
+                    setSelectedDeviceData(newData);
+                }
+            },
+        );
+    };
+
     return (
         <ContentWrapper>
             <DeviceStatusWrapper>
                 <DeviceSelect
                     devices={props.devices}
                     onSelect={(id) => {
-                        setSelectedDevice(id);
-                        setSelectedDeviceData({ ...devicesData[id] });
+                        socket.emit("select-device", { id: id }, (response) => {
+                            if (response.status == "OK") {
+                                setSelectedDevice(id);
+                                setSelectedDeviceData({ ...response.state });
+                            }
+                        });
                     }}
                     isLoading={props.isLoading}
                     updateDevices={props.updateDevices}
@@ -155,8 +175,8 @@ function Dashboard(props) {
                                                 newData.peripherals_state[
                                                     p.id
                                                 ] = newState;
-                                                // socket update -> on ok:
-                                                setSelectedDeviceData(newData);
+
+                                                updateState(newData, id);
                                             }}
                                             setName={(newName) => {
                                                 let newData = {
@@ -168,8 +188,7 @@ function Dashboard(props) {
                                                     )
                                                 ].name = newName;
 
-                                                // socket update -> on ok:
-                                                setSelectedDeviceData(newData);
+                                                updateState(newData, id);
                                             }}
                                         ></LightTile>
                                     </div>
@@ -193,8 +212,7 @@ function Dashboard(props) {
                                                     p.id
                                                 ] = newState;
 
-                                                // socket update -> on ok:
-                                                setSelectedDeviceData(newData);
+                                                updateState(newData, id);
                                             }}
                                             setName={(newName) => {
                                                 let newData = {
@@ -206,8 +224,7 @@ function Dashboard(props) {
                                                     )
                                                 ].name = newName;
 
-                                                // socket update -> on ok:
-                                                setSelectedDeviceData(newData);
+                                                updateState(newData, id);
                                             }}
                                         ></GarageGate>
                                     </div>
@@ -231,8 +248,7 @@ function Dashboard(props) {
                                                     p.id
                                                 ] = newState;
 
-                                                // socket update -> on ok:
-                                                setSelectedDeviceData(newData);
+                                                updateState(newData, id);
                                             }}
                                             setName={(newName) => {
                                                 let newData = {
@@ -244,8 +260,7 @@ function Dashboard(props) {
                                                     )
                                                 ].name = newName;
 
-                                                // socket update -> on ok:
-                                                setSelectedDeviceData(newData);
+                                                updateState(newData, id);
                                             }}
                                         ></LightRgbTile>
                                     </div>
@@ -269,8 +284,7 @@ function Dashboard(props) {
                                                     p.id
                                                 ] = newState;
 
-                                                // socket update -> on ok:
-                                                setSelectedDeviceData(newData);
+                                                updateState(newData, id);
                                             }}
                                             setName={(newName) => {
                                                 let newData = {
@@ -282,8 +296,7 @@ function Dashboard(props) {
                                                     )
                                                 ].name = newName;
 
-                                                // socket update -> on ok:
-                                                setSelectedDeviceData(newData);
+                                                updateState(newData, id);
                                             }}
                                         ></Lock>
                                     </div>

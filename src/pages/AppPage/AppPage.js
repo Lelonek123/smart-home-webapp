@@ -32,19 +32,16 @@ function AppPage(props) {
         if (!user) {
             navigate("/login");
         } else {
-            // socket.on("connect", () => {
-            //     socket.emit("get-drivers", user.uid, (response) => {
-            //         if (response.status == "OK") {
-            //             console.log(response.drivers);
-            //             setDevices(response.drivers);
-            //             setDevicesLoading(false);
-            //         }
-            //     });
-            // });
-            // socket.connect();
-
-            setDevices(drivers);
-            setDevicesLoading(false);
+            socket.on("connect", () => {
+                socket.emit("get-drivers", user.uid, (response) => {
+                    if (response.status == "OK") {
+                        console.log(response.drivers);
+                        setDevices(response.drivers);
+                        setDevicesLoading(false);
+                    }
+                });
+            });
+            socket.connect();
         }
     }, [user, loading]);
 
