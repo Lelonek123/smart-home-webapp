@@ -1,19 +1,97 @@
 import React from "react";
+import StatusDot from "components/status/statusDot";
 
 function DeviceStatus(props) {
     const renderContent = () => {
-        console.log(props.selectedDeviceData);
-        return <div>{`${props.selectedDeviceData}`}</div>;
+        const rowStyle = {
+            backgroundColor: "hsl(222, 100%, 97%)",
+            borderRadius: "20px",
+            padding: "4px 10px",
+        };
+
+        const renderStatusData = () => {
+            return (
+                <>
+                    <div style={rowStyle}>
+                        {"Power: "}
+                        <div
+                            style={{
+                                width: "15px",
+                                height: "15px",
+                                display: "inline-block",
+                                margin: "0 5px",
+                            }}
+                        >
+                            <StatusDot
+                                active={props.selectedDeviceData.isOnline}
+                            />
+                        </div>
+                        {`${
+                            props.selectedDeviceData.isPowered
+                                ? "Power outlet"
+                                : "Battery"
+                        }`}
+                    </div>
+                    <div style={rowStyle}>
+                        {"Alarm: "}
+                        <div
+                            style={{
+                                width: "15px",
+                                height: "15px",
+                                display: "inline-block",
+                                margin: "0 5px",
+                            }}
+                        >
+                            <StatusDot
+                                active={props.selectedDeviceData.isOnline}
+                            />
+                        </div>
+                        {props.selectedDeviceData.alarm
+                            ? "Enabled"
+                            : "Disabled"}
+                    </div>
+                </>
+            );
+        };
+
+        return (
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    gap: "30px",
+                    alignItems: "center",
+                    padding: "0 30px",
+                    justifyContent: "center",
+                }}
+            >
+                <div style={rowStyle}>
+                    {`Status:`}
+                    <div
+                        style={{
+                            width: "15px",
+                            height: "15px",
+                            display: "inline-block",
+                            margin: "0 5px",
+                        }}
+                    >
+                        <StatusDot active={props.selectedDeviceData.isOnline} />
+                    </div>
+                    {props.selectedDeviceData.isOnline ? "Online" : "Offline"}
+                </div>
+                {props.selectedDeviceData.isOnline && renderStatusData()}
+            </div>
+        );
     };
 
     return (
         <div
             style={{
                 minWidth: "min-content",
-                flexGrow: "1",
-                height: "fit-content",
+                flexGrow: "0",
                 border: "2px solid hsl(0, 0%, 94%)",
-                position: "relative",
+                flexGrow: "1",
             }}
         >
             <div
@@ -46,6 +124,7 @@ function DeviceStatus(props) {
                         alignItems: "center",
                     }}
                 >
+                    {!props.selectedDevice && <div>No device selected.</div>}
                     {props.selectedDevice &&
                         props.selectedDeviceData &&
                         renderContent()}

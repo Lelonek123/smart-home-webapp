@@ -26,7 +26,8 @@ function DeviceSelect(props) {
                     display: "flex",
                     flexDirection: "row",
                     alignItems: "center",
-                    padding: "0 5px",
+                    padding: "0 30px",
+                    flexGrow: "1",
                 }}
             >
                 {props.devices && props.devices.length > 0 ? (
@@ -104,7 +105,6 @@ function DeviceSelect(props) {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    // borderTop: "1px solid hsl(0, 0%, 94%)",
                     paddingTop: "10px",
                 }}
             >
@@ -263,8 +263,7 @@ function DeviceSelect(props) {
     return (
         <div
             style={{
-                flexGrow: "1",
-                height: "fit-content",
+                flexGrow: "2",
                 border: "2px solid hsl(0, 0%, 94%)",
                 position: "relative",
             }}
