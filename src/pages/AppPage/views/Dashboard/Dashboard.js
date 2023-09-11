@@ -176,7 +176,7 @@ function Dashboard(props) {
                                                     p.id
                                                 ] = newState;
 
-                                                updateState(newData, id);
+                                                updateState(newData, p.id);
                                             }}
                                             setName={(newName) => {
                                                 let newData = {
@@ -188,7 +188,7 @@ function Dashboard(props) {
                                                     )
                                                 ].name = newName;
 
-                                                updateState(newData, id);
+                                                updateState(newData, p.id);
                                             }}
                                         ></LightTile>
                                     </div>
@@ -212,7 +212,7 @@ function Dashboard(props) {
                                                     p.id
                                                 ] = newState;
 
-                                                updateState(newData, id);
+                                                updateState(newData, p.id);
                                             }}
                                             setName={(newName) => {
                                                 let newData = {
@@ -224,7 +224,7 @@ function Dashboard(props) {
                                                     )
                                                 ].name = newName;
 
-                                                updateState(newData, id);
+                                                updateState(newData, p.id);
                                             }}
                                         ></GarageGate>
                                     </div>
@@ -248,7 +248,7 @@ function Dashboard(props) {
                                                     p.id
                                                 ] = newState;
 
-                                                updateState(newData, id);
+                                                updateState(newData, p.id);
                                             }}
                                             setName={(newName) => {
                                                 let newData = {
@@ -260,7 +260,7 @@ function Dashboard(props) {
                                                     )
                                                 ].name = newName;
 
-                                                updateState(newData, id);
+                                                updateState(newData, p.id);
                                             }}
                                         ></LightRgbTile>
                                     </div>
@@ -284,7 +284,7 @@ function Dashboard(props) {
                                                     p.id
                                                 ] = newState;
 
-                                                updateState(newData, id);
+                                                updateState(newData, p.id);
                                             }}
                                             setName={(newName) => {
                                                 let newData = {
@@ -296,7 +296,7 @@ function Dashboard(props) {
                                                     )
                                                 ].name = newName;
 
-                                                updateState(newData, id);
+                                                updateState(newData, p.id);
                                             }}
                                         ></Lock>
                                     </div>
