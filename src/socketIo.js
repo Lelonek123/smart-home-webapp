@@ -5,6 +5,9 @@ const socket = io("95.48.106.222:1337", {
     query: {
         type: "webApp",
     },
+    cors: {
+        origin: "http://95.48.106.222:1337",
+    },
 });
 
 export { socket };
